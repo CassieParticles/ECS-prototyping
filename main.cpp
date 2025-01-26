@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-//
+
 #include "ECS/ECS.h"
 #include "ECS/Entity.h"
+
+#include "TestComp.h"
 
 
 
@@ -11,18 +13,12 @@ int main()
 {
 	Entity entityA = ECS::createEntity("Entity A");
 	Entity entityB = ECS::createEntity("Entity B");
+	Entity entityC = ECS::createEntity("Entity C");
+	Entity entityD = ECS::createEntity("Entity D");
 
-	std::cout << entityA.getComponent<TagComponent>()->name << '\n';
-	std::cout << entityA.hasComponent<TagComponent>() << '\n';
-	entityA.removeComponent<TagComponent>();
-	std::cout << entityA.hasComponent<TagComponent>() << '\n';
-	std::cout << entityB.getComponent<TagComponent>()->name << '\n';
+	entityB.addComponent<TestComp>(3.14159f);
 
-	{
-		Entity entityC = ECS::createEntity("Entity C");
-
-		std::cout << entityC.getComponent<TagComponent>()->name << '\n';
-	}
+	std::cout<<ECS::getRegistry()->getComponentArr<TestComp>(nullptr)->getEntity().getComponent<TagComponent>()->name<<'\n';
 
 	return 0;
 }

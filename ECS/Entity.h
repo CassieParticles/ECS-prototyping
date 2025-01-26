@@ -46,7 +46,7 @@ private:
 template<Component C, typename ...Args>
 inline C* Entity::addComponent(Args... args)
 {
-	return ECS::getRegistry()->addComponent<C, Args>(entityId, args);
+	return ECS::getRegistry()->addComponent<C>(entityId,std::forward<Args>(args)...);
 }
 
 template<Component C>

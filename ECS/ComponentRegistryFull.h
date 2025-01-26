@@ -21,6 +21,9 @@ public:
 	template<Component C>
 	void removeComponent(EntityId entId);
 
+	template<Component C>
+	C* getComponentArr(int* size);
+
 	void removeEntity(EntityId entId) 
 	{
 		for (auto& it : registries)
@@ -88,6 +91,17 @@ void FullCompRegistry::removeComponent(EntityId entId)
 	{
 		registry->RemoveComponent(entId);
 	}
+}
+
+template<Component C>
+inline C* FullCompRegistry::getComponentArr(int* size)
+{
+	if (CompRegistryAlloc<C>* registry = getRegistry<C>())
+	{
+		return registry->GetComponentArr(size);
+	}
+	if (size) { *size = 0; }
+	return nullptr;
 }
 
 

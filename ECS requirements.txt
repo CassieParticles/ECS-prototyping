@@ -1,3 +1,2 @@
-Function to get array of all components to be iterated over
 Move Entity constructor to private, make ECS friend class
 Base System interface

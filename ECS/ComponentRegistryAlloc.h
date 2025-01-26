@@ -32,6 +32,8 @@ public:
 	C* GetComponent(EntityId entId);
 	void RemoveComponent(EntityId entId);
 
+	C* GetComponentArr(int* size);
+
 private:
 	std::vector<char> compByteArray;
 	unsigned int firstIndexFree = 0;
@@ -120,10 +122,15 @@ inline void CompRegistryAlloc<C>::RemoveComponent(EntityId entId)
 		indexEntMap.at(compRemoveIndex) = lastCompEntity;
 	}
 
-
-
-
 	--firstIndexFree;
+}
+
+template<Component C>
+inline C* CompRegistryAlloc<C>::GetComponentArr(int* size)
+{
+	if (size) { *size = firstIndexFree; }
+
+	return reinterpret_cast<C*>(compByteArray.data());
 }
 
 template<Component C>

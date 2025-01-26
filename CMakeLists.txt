@@ -12,6 +12,7 @@ endif()
 project ("ECS")
 
 list(APPEND SourceFiles  "main.cpp")
+list(APPEND SourceFiles  "TestComp.h")
 
 list(APPEND SourceFiles  "ECS/Component.cpp" "ECS/Component.h")
 list(APPEND SourceFiles  "ECS/ComponentRegistryAlloc.h")

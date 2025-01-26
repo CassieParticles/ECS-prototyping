@@ -6,13 +6,6 @@
 class Entity final
 {
 public:
-
-
-	~Entity()
-	{
-		ECS::getRegistry()->removeEntity(entityId);
-	}
-
 	template<Component C,typename... Args>
 	C* addComponent(Args... args);
 

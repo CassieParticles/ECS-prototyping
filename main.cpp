@@ -14,6 +14,8 @@ int main()
 	Entity entity = ECS::getEntityByName("Entity A");
 	std::cout << entity.getComponent<TransformComponent>()->position << '\n';
 
+	ECS::destroyEntity(entity);
+
 	return 0;
 }
 

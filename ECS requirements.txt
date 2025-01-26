@@ -1,2 +1,2 @@
 Wrapper for iterable collection of components gotten from "getCommponentArr"
-Be able to get an entity by it's name (in tagComponent)
+Components have overridable "OnConstruction" "OnDestruction" functions

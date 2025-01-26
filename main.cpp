@@ -10,7 +10,9 @@
 
 int main()
 {
-
+	ECS::createEntity("Entity A").getComponent<TransformComponent>()->position = 5;
+	Entity entity = ECS::getEntityByName("Entity A");
+	std::cout << entity.getComponent<TransformComponent>()->position << '\n';
 
 	return 0;
 }

@@ -14,6 +14,8 @@ public:
 
 	static Entity createEntity(const std::string& name = "Entity");
 
+	static Entity getEntityByName(const std::string& name);
+
 private:
 	static FullCompRegistry registry;
 

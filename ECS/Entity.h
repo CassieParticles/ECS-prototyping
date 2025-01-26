@@ -13,7 +13,10 @@ public:
 		ECS::getRegistry()->addComponent<TagComponent>(entityId, name);
 	}
 
-	~Entity(){}
+	~Entity()
+	{
+		ECS::getRegistry()->removeEntity(entityId);
+	}
 
 	template<Component C,typename... Args>
 	C* addComponent(Args... args);

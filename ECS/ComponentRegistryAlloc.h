@@ -16,7 +16,7 @@ typedef uint32_t EntityId;
 class ICompRegistry
 {
 public:
-	
+	virtual void RemoveComponent(EntityId entityId) = 0;
 };
 
 template<Component C>

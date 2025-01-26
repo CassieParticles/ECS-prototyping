@@ -18,7 +18,11 @@ int main()
 	std::cout << entityA.hasComponent<TagComponent>() << '\n';
 	std::cout << entityB.getComponent<TagComponent>()->name << '\n';
 
-	
+	{
+		Entity entityC = ECS::createEntity("Entity C");
+
+		std::cout << entityC.getComponent<TagComponent>()->name << '\n';
+	}
 
 	return 0;
 }

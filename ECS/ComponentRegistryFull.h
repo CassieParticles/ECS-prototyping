@@ -20,6 +20,14 @@ public:
 
 	template<Component C>
 	void removeComponent(EntityId entId);
+
+	void removeEntity(EntityId entId) 
+	{
+		for (auto& it : registries)
+		{
+			it.second->RemoveComponent(entId);
+		}
+	}
 	
 protected:
 
@@ -81,6 +89,7 @@ void FullCompRegistry::removeComponent(EntityId entId)
 		registry->RemoveComponent(entId);
 	}
 }
+
 
 template<Component C>
 CompRegistryAlloc<C>* FullCompRegistry::getRegistry()

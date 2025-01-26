@@ -5,14 +5,14 @@
 #include "ECS/ECS.h"
 #include "ECS/Entity.h"
 
-
+#include "TestComp.h"
 
 
 int main()
 {
-	ECS::createEntity("Entity A").getComponent<TransformComponent>()->position = 5;
-	Entity entity = ECS::getEntityByName("Entity A");
-	std::cout << entity.getComponent<TransformComponent>()->position << '\n';
+	Entity entity = ECS::createEntity("Entity A");
+
+	entity.addComponent<TestCompA>();
 
 	ECS::destroyEntity(entity);
 

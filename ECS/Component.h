@@ -13,6 +13,9 @@ public:
 	EntityId getEntityId() { return entityId; }
 	Entity getEntity();	//Needs to be defined in separate translation unit
 	virtual ~BaseComponent() {}
+
+	virtual void OnComponentAdded() {}
+	virtual void OnComponentRemoved() {}
 	
 protected:
 	EntityId entityId{};

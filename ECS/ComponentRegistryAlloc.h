@@ -100,6 +100,7 @@ inline void CompRegistryAlloc<C>::RemoveComponent(EntityId entId)
 	unsigned int compRemoveIndex = entIndexMap.at(entId);
 	char* compRemoveByte = compByteArray.data() + compRemoveIndex * sizeof(C);
 	C* compRemove = reinterpret_cast<C*>(compRemoveByte);
+	compRemove->OnComponentRemoved();
 	compRemove->~C();
 
 	//Get pointer to last component in array, and move it to compRemove

@@ -59,6 +59,7 @@ C* FullCompRegistry::addComponent(EntityId entId, Args&&... args)
 	C* component = getRegistry<C>()->EmplaceComponent(entId, std::forward<Args>(args)...);
 
 	component->entityId = entId;
+	component->OnComponentAdded();
 
 	return component;
 }

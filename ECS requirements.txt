@@ -1,2 +1,3 @@
 Wrapper for iterable collection of components gotten from "getCommponentArr"
-Components have overridable "OnConstruction" "OnDestruction" functions
+Components have overridable "OnConstruction" "OnDestruction" functions, that can add new components to the entity as well
+Can Duplicate Entity (create new Entity based on original)

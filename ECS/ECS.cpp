@@ -15,6 +15,11 @@ Entity ECS::createEntity(const std::string& name)
 	return Entity(nextFreeId++,name);
 }
 
+Entity ECS::createEntity(Entity& origEntity)
+{
+	Entity newEntity = Entity(nextFreeId++);
+}
+
 void ECS::destroyEntity(Entity entity)
 {
 	ECS::getRegistry()->removeEntity(entity.getEntityId());

@@ -37,6 +37,7 @@ private:
 
 	friend class BaseComponent;
 	friend class ECS;
+	friend class ComponentRegistryFull;
 };
 
 template<Component C, typename ...Args>

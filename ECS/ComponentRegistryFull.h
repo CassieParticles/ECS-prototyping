@@ -20,6 +20,10 @@ public:
 	template<Component C>
 	C* getComponent(EntityId entId);
 
+	
+	template<Component C>
+	C* copyComponent(EntityId origEntId, EntityId copyEntId);
+
 	template<Component C>
 	void removeComponent(EntityId entId);
 
@@ -31,6 +35,14 @@ public:
 		for (auto& it : registries)
 		{
 			it.second->RemoveComponent(entId);
+		}
+	}
+
+	void copyEntity(EntityId origEntId, EntityId newEntId)
+	{
+		for (auto& it : registries)
+		{
+			
 		}
 	}
 	
@@ -84,6 +96,21 @@ C* FullCompRegistry::getComponent(EntityId entId)
 	{
 		return registry->GetComponent(entId);
 	}
+	return nullptr;
+}
+
+template<Component C>
+inline C* FullCompRegistry::copyComponent(EntityId origEntId, EntityId copyEntId)
+{
+	if (CompRegistryAlloc<C>* registry = getRegistry<C>())
+	{
+		C* newComp = registry->CopyComponent(origEntId, copyEntId);
+		newComp->entityId = copyEntId;
+		newComp->OnComponentAdded();
+
+		return newComp;
+	}
+
 	return nullptr;
 }
 

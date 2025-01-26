@@ -26,6 +26,13 @@ protected:
 class TransformComponent final: public BaseComponent
 {
 public:
+	TransformComponent(TransformComponent& other)
+	{
+		other.position = position;
+		other.rotation = rotation;
+	}
+	TransformComponent operator=(TransformComponent& RHS) { return RHS; }
+
 	TransformComponent(float position = 0, float rotation = 0) :position{ position }, rotation{ rotation } {}
 	float position;
 	float rotation;
@@ -36,6 +43,11 @@ class TagComponent final : public BaseComponent
 {
 public:
 	TagComponent(const std::string& name = "") :name{name} {}
+	TagComponent(TagComponent& other)
+	{
+		other.name = name;
+	}
+	TagComponent operator=(TagComponent& RHS) { return RHS; }
 
 	std::string name;
 private:

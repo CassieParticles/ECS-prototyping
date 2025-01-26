@@ -1,2 +1,4 @@
 Can Duplicate Entity (create new Entity based on original)
 Make iterator for ComponentArray
+
+Get component Array can get several components in one

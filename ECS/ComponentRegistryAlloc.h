@@ -28,6 +28,7 @@ public:
 	C* EmplaceComponent(EntityId entId, Args&&... args);
 	bool HasComponent(EntityId entId);
 	C* GetComponent(EntityId entId);
+	C* CopyComponent(EntityId origEntId, EntityId copyEntId);
 	void RemoveComponent(EntityId entId);
 
 	ComponentArray<C> GetComponentArr();
@@ -87,6 +88,23 @@ inline C* CompRegistryAlloc<C>::GetComponent(EntityId entId)
 	
 	char* compBytePtr = compByteArray.data() + entIndexMap.at(entId) * sizeof(C);
 	return reinterpret_cast<C*>(compBytePtr);
+}
+
+template<Component C>
+inline C* CompRegistryAlloc<C>::CopyComponent(EntityId origEntId, EntityId copyEntId)
+{
+	C* origComp = reinterpret_cast<C*>(compByteArray.data() + entIndexMap.at(origEntId) * sizeof(C));
+	
+	//Copy component over
+	char* newCompBytePtr = compByteArray.data() + firstIndexFree * sizeof(C);
+	C* newCompPtr = reinterpret_cast<C*>(newCompBytePtr);
+	*newCompPtr = *origComp;
+
+	entIndexMap.insert({ copyEntId,firstIndexFree });
+	indexEntMap.insert({ firstIndexFree,copyEntId });
+
+	firstIndexFree++;
+	return newCompPtr;
 }
 
 template<Component C>

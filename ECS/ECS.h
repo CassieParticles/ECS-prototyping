@@ -13,6 +13,7 @@ public:
 	static FullCompRegistry* getRegistry() { return &registry; }
 
 	static Entity createEntity(const std::string& name = "Entity");
+	static Entity createEntity(Entity& origEntity);
 	static void destroyEntity(Entity entity);
 
 	static Entity getEntityByName(const std::string& name);

@@ -1,0 +1,4 @@
+Function to get array of all components to be iterated over
+Function to purge specific entity from all registries
+Base System interface
+Github

@@ -1,6 +1,7 @@
 #include "ECS.h"
 
 #include "Entity.h"
+#include "Component.h"
 
 FullCompRegistry ECS::registry = FullCompRegistry();
 EntityId ECS::nextFreeId = 0;
@@ -21,14 +22,13 @@ void ECS::destroyEntity(Entity entity)
 
 Entity ECS::getEntityByName(const std::string& name)
 {
-	int entCount;
-	TagComponent* tagArr = getRegistry()->getComponentArr<TagComponent>(&entCount);
+	ComponentArray<TagComponent> tagArr = getRegistry()->getComponentArr<TagComponent>();
 
-	for (int i = 0; i < entCount; ++i)
+	for(int i=0;i<tagArr.getArrSize();++i)
 	{
-		if (tagArr->name == name)
+		if (tagArr.getComp(i).name == name)
 		{
-			return tagArr->getEntity();
+			return tagArr.getComp(i).getEntity();
 		}
 	}
 	//There isn't an entity with this name, so create one

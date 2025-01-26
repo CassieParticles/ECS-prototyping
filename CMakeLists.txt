@@ -17,6 +17,7 @@ list(APPEND SourceFiles  "TestComp.h")
 list(APPEND SourceFiles  "ECS/Component.cpp" "ECS/Component.h")
 list(APPEND SourceFiles  "ECS/ComponentRegistryAlloc.h")
 list(APPEND SourceFiles  "ECS/ComponentRegistryFull.h")
+list(APPEND SourceFiles  "ECS/ComponentIterator.h")
 list(APPEND SourceFiles  "ECS/Entity.h")
 list(APPEND SourceFiles  "ECS/ECS.cpp" "ECS/ECS.h")
 

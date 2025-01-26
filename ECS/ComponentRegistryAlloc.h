@@ -6,10 +6,8 @@
 #include <iostream>
 #include <new>
 
-class BaseComponent;
-
-template<typename T>
-concept Component = std::is_base_of<BaseComponent, T>::value;
+#include "ComponentArray.h"
+#include "ComponentConcept.h"
 
 typedef uint32_t EntityId;
 
@@ -32,7 +30,7 @@ public:
 	C* GetComponent(EntityId entId);
 	void RemoveComponent(EntityId entId);
 
-	C* GetComponentArr(int* size);
+	ComponentArray<C> GetComponentArr();
 
 private:
 	std::vector<char> compByteArray;
@@ -127,11 +125,10 @@ inline void CompRegistryAlloc<C>::RemoveComponent(EntityId entId)
 }
 
 template<Component C>
-inline C* CompRegistryAlloc<C>::GetComponentArr(int* size)
+inline ComponentArray<C> CompRegistryAlloc<C>::GetComponentArr()
 {
-	if (size) { *size = firstIndexFree; }
+	return ComponentArray(reinterpret_cast<C*>(compByteArray.data()), firstIndexFree);
 
-	return reinterpret_cast<C*>(compByteArray.data());
 }
 
 template<Component C>

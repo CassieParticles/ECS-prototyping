@@ -1,6 +1,8 @@
 #pragma once
 #include "ComponentRegistryAlloc.h"
 
+#include "ComponentArray.h"
+
 class FullCompRegistry final
 {
 public:
@@ -22,7 +24,7 @@ public:
 	void removeComponent(EntityId entId);
 
 	template<Component C>
-	C* getComponentArr(int* size);
+	ComponentArray<C> getComponentArr();
 
 	void removeEntity(EntityId entId) 
 	{
@@ -95,14 +97,16 @@ void FullCompRegistry::removeComponent(EntityId entId)
 }
 
 template<Component C>
-inline C* FullCompRegistry::getComponentArr(int* size)
+inline ComponentArray<C> FullCompRegistry::getComponentArr()
 {
 	if (CompRegistryAlloc<C>* registry = getRegistry<C>())
 	{
-		return registry->GetComponentArr(size);
+		return registry->GetComponentArr();
 	}
-	if (size) { *size = 0; }
-	return nullptr;
+	size_t type = typeid(C).hash_code();
+	registries.insert({ type,std::unique_ptr<ICompRegistry>(new CompRegistryAlloc<C>()) });
+
+	return getRegistry<C>()->GetComponentArr();
 }
 
 

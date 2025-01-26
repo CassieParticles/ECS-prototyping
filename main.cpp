@@ -14,6 +14,8 @@ int main()
 
 	entity.addComponent<TestCompA>();
 
+	std::cout<<ECS::getEntityByName("Entity A").hasComponent<TestCompB>();
+
 	ECS::destroyEntity(entity);
 
 	return 0;

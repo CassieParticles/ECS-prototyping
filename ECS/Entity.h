@@ -6,12 +6,7 @@
 class Entity final
 {
 public:
-	Entity(EntityId entityId, const std::string& name):entityId{entityId}
-	{
-		//Add default components
-		ECS::getRegistry()->addComponent<TransformComponent>(entityId);
-		ECS::getRegistry()->addComponent<TagComponent>(entityId, name);
-	}
+
 
 	~Entity()
 	{
@@ -32,6 +27,13 @@ public:
 
 	EntityId getEntityId() { return entityId; }
 private:
+	Entity(EntityId entityId, const std::string& name) :entityId{ entityId }
+	{
+		//Add default components
+		ECS::getRegistry()->addComponent<TransformComponent>(entityId);
+		ECS::getRegistry()->addComponent<TagComponent>(entityId, name);
+	}
+
 	//
 	Entity(EntityId entityId) :entityId{ entityId }
 	{
@@ -41,6 +43,7 @@ private:
 	EntityId entityId;
 
 	friend class BaseComponent;
+	friend class ECS;
 };
 
 template<Component C, typename ...Args>
